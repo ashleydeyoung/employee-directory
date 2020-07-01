@@ -1,6 +1,13 @@
 import React from "react";
 
-const DataTable = () => {
+const DataTable = (props) => {
+  console.log(props.employees);
+    props.employees.map((employee) => {
+        console.log(employee.name.first)
+        console.log(employee.login.uuid)
+
+        
+    })
   return (
     <table className="table">
       <thead className="thead-light">
@@ -13,24 +20,19 @@ const DataTable = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {props.employees.map((employee) => (
+          
+            <tr key= {employee.login.uuid}>
+              <td>{employee.gender}</td>
+              <td>
+                {employee.name.first} {employee.name.last}
+              </td>
+              <td>{employee.phone}</td>
+              <td>{employee.email}</td>
+              <td>{employee.dob.date}</td>
+            </tr>
+          
+        ))}
       </tbody>
     </table>
   );
