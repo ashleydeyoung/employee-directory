@@ -1,22 +1,25 @@
 import React from "react";
 
 const DataTable = (props) => {
-  console.log(props.employees);
-    props.employees.map((employee) => {
-        console.log(employee.name.first)
-        console.log(employee.login.uuid)
-
-        
-    })
+//   console.log(props.employees);
+// props.employees.map((employee) => 
+//     console.log(employee.dob.date)
+// )
+    
+function getDate(date) {
+    const dateSplit= date.split("", 10);
+    return dateSplit;
+  }
+    
   return (
     <table className="table">
       <thead className="thead-light">
         <tr>
-          <th scope="col">Image</th>
+          <th scope="col">Gender</th>
           <th scope="col">Name</th>
           <th scope="col">Phone</th>
           <th scope="col">Email</th>
-          <th scope="col">DOB</th>
+          <th scope="col">Birthday</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +32,7 @@ const DataTable = (props) => {
               </td>
               <td>{employee.phone}</td>
               <td>{employee.email}</td>
-              <td>{employee.dob.date}</td>
+              <td>{getDate(employee.dob.date)}</td>
             </tr>
           
         ))}
