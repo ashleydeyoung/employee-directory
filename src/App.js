@@ -1,14 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Wrapper from "./components/Wrapper";
 import Header from "./components/Header";
 import DataTable from "./components/DataTable";
-import employees from "./employees.json";
+
 function App() {
   return (
     <div className="App">
-      <Header />
-      <DataTable employees={employees}/>
-      
+      <Wrapper>
+        <Header />
+        <DataTable />
+      </Wrapper>
     </div>
   );
 }

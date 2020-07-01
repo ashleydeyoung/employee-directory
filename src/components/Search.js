@@ -1,18 +1,21 @@
 import React from "react";
 
 
-const Search = () => {
+function Search (props) {
     return (
         <div className="searchbox">
           <div className="input-group">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="">
+                <span className="input-group-text" onClick ={props.handleFormSubmit} id="">
                   Search
                 </span>
               </div>
               <input
               className="form-control mr-sm-2"
-              type="search"
+              
+              onChange={props.handleInputChange}
+              name = "firstName"
+              type="text"
               placeholder="Employee name"
               aria-label="Search"
             />

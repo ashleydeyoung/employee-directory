@@ -1,5 +1,5 @@
 import React from "react";
-import Search from "./Search.js";
+// import Search from "./Search.js";
 
 function Header() {
   return (
@@ -8,7 +8,7 @@ function Header() {
       <p className="lead">
         Use the search box below to find employees by name
       </p>
-      <Search />
+
     </div>
   );
 }
