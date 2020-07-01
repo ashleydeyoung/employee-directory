@@ -15,18 +15,23 @@ function getDate(date) {
     <table className="table">
       <thead className="thead-light">
         <tr>
-          <th scope="col">Gender</th>
+          <th scope="col">Photo</th>
           <th scope="col">Name</th>
           <th scope="col">Phone</th>
           <th scope="col">Email</th>
-          <th scope="col">Birthday</th>
+          <th scope="col">DOB</th>
         </tr>
       </thead>
       <tbody>
         {props.employees.map((employee) => (
           
             <tr key= {employee.login.uuid}>
-              <td>{employee.gender}</td>
+              <td>
+                <img 
+                src={employee.picture.medium}
+                alt={employee.name.first}
+                />
+                </td>
               <td>
                 {employee.name.first} {employee.name.last}
               </td>
