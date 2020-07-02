@@ -29,24 +29,32 @@ class DataTable extends React.Component {
     event.preventDefault();
     console.log("clicks");
     let employeeSearch = employees.filter((e) => {
-      return e.name.first.includes(this.state.firstName);
+      if (e.name.first.toLowerCase().substr(0, this.state.firstName.length) === this.state.firstName.toLowerCase().substr(0, this.state.firstName.length)){
+
+        return true;
+      } else {
+        return false
+      }
+    
     });
     //setState
-    this.setState({ employees: employeeSearch });
+    this.setState({ employeeSearch });
   };
 
-  // sortByName ( a, b ) {
-  //   const nameA = a.name.first.toLowerCase();
-  //   const nameB = b.name.first.toLowerCase();
+ 
 
-  //   let comparison = 0;
-  //   if (nameA > nameB) {
-  //     comparison = 1;
-  //   } else if (nameA < nameB) {
-  //     comparison = -1;
-  //   }
-  //   return comparison
-  // }
+  sortByName ( a, b ) {
+    // const nameA = a.name.first.toLowerCase();
+    // const nameB = b.name.first.toLowerCase();
+
+    let comparison = 0;
+    if (a > b) {
+      comparison = 1;
+    } else if (a < b) {
+      comparison = -1;
+    }
+    return comparison
+  }
 
   handleNameClick = () => {
     console.log("clicked")
@@ -62,7 +70,7 @@ class DataTable extends React.Component {
   })
     this.setState(
       {
-          employees: sortedEmployees
+          sortedEmployees
       }
   );
   };
@@ -104,6 +112,7 @@ class DataTable extends React.Component {
                 phone={employee.phone}
                 email={employee.email}
                 date={this.getDate(employee.dob.date)}
+                sort= {this.sortByName(employee.name.first)}
               />
             ))}
           </tbody>

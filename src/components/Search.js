@@ -6,7 +6,7 @@ function Search (props) {
         <div className="searchbox">
           <div className="input-group">
               <div className="input-group-prepend">
-                <span className="input-group-text" onClick ={props.handleFormSubmit} id="">
+                <span className="input-group-text" onClick={(event) => props.handleFormSubmit(event)} id="">
                   Search
                 </span>
               </div>
