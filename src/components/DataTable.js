@@ -1,26 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
 import DataRow from "./DataRow";
 import employees from "../employees.json";
 import Search from "./Search";
 
-class DataTable extends Component {
+class DataTable extends React.Component {
   state = {
-    sorted: employees,
+    employees,
     firstName: "",
+    
   };
 
   handleInputChange = (event) => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
-    console.log(value)
-    let newList = employees.filter(emp => {
-     return emp.name.first.toLowerCase().includes(value.toLowerCase())
-     
-    })
-    console.log(newList)
+    // console.log(value)
+    let newList = employees.filter((emp) => {
+      return emp.name.first.toLowerCase().includes(value.toLowerCase());
+    });
+    // console.log(newList)
     // Updating the input's state
     this.setState({
-      sorted: newList,
+      employees: newList,
     });
   };
 
@@ -28,17 +28,45 @@ class DataTable extends Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
     console.log("clicks");
-    let employeeArray = employees.filter((e) => {
+    let employeeSearch = employees.filter((e) => {
       return e.name.first.includes(this.state.firstName);
     });
     //setState
-    this.setState({ sorted: employeeArray });
-
-    this.setState({
-      firstName: "",
-      lastName: "",
-    });
+    this.setState({ employees: employeeSearch });
   };
+
+  // sortByName ( a, b ) {
+  //   const nameA = a.name.first.toLowerCase();
+  //   const nameB = b.name.first.toLowerCase();
+
+  //   let comparison = 0;
+  //   if (nameA > nameB) {
+  //     comparison = 1;
+  //   } else if (nameA < nameB) {
+  //     comparison = -1;
+  //   }
+  //   return comparison
+  // }
+
+  handleNameClick = () => {
+    console.log("clicked")
+    let sortedEmployees = this.state.employees.sort((a, b) => {
+      // This comparison logic adapted from example found at:
+      // https://www.w3schools.com/js/js_array_sort.asp
+
+      const nameA = a.name.first.toLowerCase();
+      const nameB = b.name.first.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+  })
+    this.setState(
+      {
+          employees: sortedEmployees
+      }
+  );
+  };
+
 
   getDate = (date) => {
     const dateSplit = date.split("", 10);
@@ -46,10 +74,10 @@ class DataTable extends Component {
   };
 
   render() {
+    const employees = this.state.employees;
     return (
       <>
         <Search
-          // firstName={this.state.firstName}
           handleInputChange={this.handleInputChange}
           handleFormSubmit={this.handleFormSubmit}
         />
@@ -58,14 +86,16 @@ class DataTable extends Component {
           <thead className="thead-light">
             <tr>
               <th scope="col">Photo</th>
-              <th scope="col">Name</th>
+              <th scope="col" onClick={this.handleNameClick}>
+                Name
+              </th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
               <th scope="col">DOB</th>
             </tr>
           </thead>
           <tbody>
-            {[...this.state.sorted].map((employee) => (
+            {[...employees].map((employee) => (
               <DataRow
                 key={employee.login.uuid}
                 picture={employee.picture.medium}
@@ -84,3 +114,7 @@ class DataTable extends Component {
 }
 
 export default DataTable;
+
+// {this.state.nameAscending? employee.sort((a,z) {return a-b}) : employee.sort((a,z) {return z-a}}
+
+//onClick => this.setStat==> this.state.nameAscending = !this.state.nameAscending
