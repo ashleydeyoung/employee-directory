@@ -3,7 +3,10 @@ import React from "react";
 //search bar with formchange
 function Search (props) {
     return (
-        <div className="searchbox">
+      <div className= "row">
+        <div className = "col-4"></div>
+        <div className = "col-4">
+        <div className="searchbox m-2">
           <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text" onClick={(event) => props.handleFormSubmit(event)} id="">
@@ -21,6 +24,9 @@ function Search (props) {
             />
             </div>
         </div>
+
+        </div>
+      </div>
       );
 }
 

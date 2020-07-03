@@ -75,7 +75,7 @@ class DataTable extends React.Component {
           handleFormSubmit={this.handleFormSubmit}
         />
 
-        <table className="table">
+        <table className="table table-striped m-2">
           <thead className="thead-light">
             <tr>
               <th scope="col">Photo</th>

@@ -1,5 +1,5 @@
 import React from "react";
-// import Search from "./Search.js";
+
 
 function Header(props) {
   return (
@@ -8,9 +8,6 @@ function Header(props) {
       <p className="lead">
         Use the search box below to find employees by name
       </p>
-      {/* <Search 
-                handleInputChange={props.handleInputChange}
-                handleFormSubmit={props.handleFormSubmit}/> */}
     </div>
   );
 }
