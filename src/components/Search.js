@@ -1,6 +1,6 @@
 import React from "react";
 
-
+//search bar with formchange
 function Search (props) {
     return (
         <div className="searchbox">

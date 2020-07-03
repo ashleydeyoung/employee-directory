@@ -7,9 +7,10 @@ class DataTable extends React.Component {
   state = {
     employees,
     firstName: "",
+    sort: "",
     
   };
-
+  //filters cahnge
   handleInputChange = (event) => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
@@ -17,7 +18,7 @@ class DataTable extends React.Component {
     let newList = employees.filter((emp) => {
       return emp.name.first.toLowerCase().includes(value.toLowerCase());
     });
-    // console.log(newList)
+  
     // Updating the input's state
     this.setState({
       employees: newList,
@@ -38,44 +39,28 @@ class DataTable extends React.Component {
     
     });
     //setState
-    this.setState({ employeeSearch });
+    this.setState({ employees: employeeSearch });
   };
 
  
+  //sorts name
+  handleNameClick=  () => {
 
-  sortByName ( a, b ) {
-    // const nameA = a.name.first.toLowerCase();
-    // const nameB = b.name.first.toLowerCase();
+    let newArray = this.state.employees
 
-    let comparison = 0;
-    if (a > b) {
-      comparison = 1;
-    } else if (a < b) {
-      comparison = -1;
+    if (this.state.sort === "ascending") {
+      let sortArray = newArray.sort((a,b) => (a.name.first > b.name.first) ? 1: -1)
+      this.setState({employees: sortArray,
+        sort: "descending"})
+    } else {
+      let sortArray = newArray.sort((a,b) => (a.name.first > b.name.first) ? -1 : 1)
+      
+      this.setState({employees: sortArray,
+      sort: "ascending"})
     }
-    return comparison
   }
 
-  handleNameClick = () => {
-    console.log("clicked")
-    let sortedEmployees = this.state.employees.sort((a, b) => {
-      // This comparison logic adapted from example found at:
-      // https://www.w3schools.com/js/js_array_sort.asp
-
-      const nameA = a.name.first.toLowerCase();
-      const nameB = b.name.first.toLowerCase();
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-  })
-    this.setState(
-      {
-          sortedEmployees
-      }
-  );
-  };
-
-
+  //gets date format from DOB in DB
   getDate = (date) => {
     const dateSplit = date.split("", 10);
     return dateSplit;
@@ -112,7 +97,6 @@ class DataTable extends React.Component {
                 phone={employee.phone}
                 email={employee.email}
                 date={this.getDate(employee.dob.date)}
-                sort= {this.sortByName(employee.name.first)}
               />
             ))}
           </tbody>
@@ -124,6 +108,3 @@ class DataTable extends React.Component {
 
 export default DataTable;
 
-// {this.state.nameAscending? employee.sort((a,z) {return a-b}) : employee.sort((a,z) {return z-a}}
-
-//onClick => this.setStat==> this.state.nameAscending = !this.state.nameAscending
